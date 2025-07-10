@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { v4 as uuidv4 } from 'uuid';
+import { CreateMachineDTO } from './dto/create-machine.dto';
+import { UpdateMachineDTO } from './dto/update-machine.dto';
+import { NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class MachineService {
@@ -14,13 +16,13 @@ export class MachineService {
       "id": 2,
       "name": "secondMachine",
 	    "location": "Belo Horizonte MG, BR",
-	    "status": "Operando"	
+	    "status": "Parada para manutenção"	
     },
     {
       "id": 3,
       "name": "thirdMachine",
 	    "location": "Belo Horizonte MG, BR",
-	    "status": "Operando"	
+	    "status": "Desligada"	
     },
     {
       "id": 4,
@@ -30,9 +32,13 @@ export class MachineService {
     }
   ]
 
-  findAll(status?: 'Operando' | 'Parada para manutencao' | 'Desligada') {
+  findAll(status?: 'Operando' | 'Parada para manutenção' | 'Desligada') {
     if (status) {
-      return this.machine.filter(machine => machine.status === status)
+      const statusArray = this.machine.filter(machine => machine.status === status)
+
+      if (statusArray.length === 0) throw new NotFoundException('Machine status Not Found!')
+      
+      return statusArray
     }
     return this.machine
   }
@@ -40,35 +46,29 @@ export class MachineService {
   findOne(id: number) {
     const mach = this.machine.find(machine => machine.id === id)
 
+    if(!mach) throw new NotFoundException('Machine not found!')
+
     return mach
   }
 
-  create(machine: {
-    name: string,
-    email: string,
-    location: string,
-    status: 'Operando' | 'Parada para manutencao' | 'Desligada'
-  }) {
+  create(createMachineDTO: CreateMachineDTO) {
     const machineByHighestId = [...this.machine].sort((a, b) => b.id - a.id)
     const newMachine = {
       id: machineByHighestId[0].id + 1,
-      ...machine
+      ...createMachineDTO
     }
     this.machine.push(newMachine)
     return newMachine
   }
 
   update(id: number,
-    updateMachine: {
-      location: string,
-      status: 'Operando' | 'Parada para manutencao' | 'Desligada'
-    }
+    updateMachineDTO: UpdateMachineDTO
   ) {
-    this.machine = this.machine.map(machine => {
-      if (machine.id === id) {
-        return {...machine, ...updateMachine}
+    this.machine = this.machine.map(mach => {
+      if (mach.id === id) {
+        return {...mach, ...updateMachineDTO}
       }
-      return machine
+      return mach
     })
     return this.findOne(id)
   }
