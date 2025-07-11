@@ -2,7 +2,7 @@
 CREATE TYPE "Status" AS ENUM ('Operando', 'Parada_para_manutenção', 'Desligada');
 
 -- CreateTable
-CREATE TABLE "Machine" (
+CREATE TABLE "Machine_Data" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "location" TEXT NOT NULL,
@@ -10,5 +10,5 @@ CREATE TABLE "Machine" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "Machine_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Machine_Data_pkey" PRIMARY KEY ("id")
 );
