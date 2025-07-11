@@ -3,8 +3,7 @@
 </p>
 
 ## Description
-
-
+The backend is developed in NestJS, utilizing the PostgreSQL database platform from Neon Serverless, supported by Prisma ORM for table creation and data management.
 
 ## Project setup
 
@@ -21,6 +20,19 @@ $ npm run start
 # watch mode
 $ npm run start:dev
 
+```
+
+## Endpoint
+```
+GET http://localhost:3000/machine-data
+
+GET http://localhost:3000/machine-data?status=[Operando | Parada para manutenção | Desligada]
+
+POST http://localhost:3000/machine-data
+
+PATCH http://localhost:3000/machine-data/[id]
+
+DELETE http://localhost:3000/machine-data/[id]
 ```
 
 ## License
