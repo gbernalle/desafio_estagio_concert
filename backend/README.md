@@ -5,6 +5,19 @@
 ## Description
 The backend is developed in NestJS, utilizing the PostgreSQL database platform from Neon Serverless, supported by Prisma ORM for table creation and data management.
 
+## Info
+
+Fiz o deploy da aplicação apenas para o backend. Será possível assim testar usando ferramentas como o insomnia e o postman, seguindo os enpoints no fim do arquivo.
+
+```
+Para requisições do tipo post e patch, seguir esse formato de json no corpo da requisição:
+
+{
+	"name": "Nova Máquina 3000",
+	"location": "-4,23342343 -2,123",
+	"status": "Desligada"
+}
+```
 ## Project setup
 
 ```bash
@@ -24,15 +37,15 @@ $ npm run start:dev
 
 ## Endpoint
 ```
-GET http://localhost:3000/machine-data
+GET http://https://desafio-estagio-concert.onrender.com/machine-data
 
-GET http://localhost:3000/machine-data?status=[Operando | Parada para manutenção | Desligada]
+GET https://desafio-estagio-concert.onrender.com/machine-data?status=[Operando | Parada para manutenção | Desligada]
 
-POST http://localhost:3000/machine-data
+POST https://desafio-estagio-concert.onrender.com/machine-data
 
-PATCH http://localhost:3000/machine-data/[id]
+PATCH https://desafio-estagio-concert.onrender.com/machine-data/[id]
 
-DELETE http://localhost:3000/machine-data/[id]
+DELETE https://desafio-estagio-concert.onrender.com/machine-data/[id]
 ```
 
 ## License
