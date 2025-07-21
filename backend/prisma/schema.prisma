@@ -19,6 +19,6 @@ model Machine_Data {
 
 enum Status {
   Operando
-  Parada_para_manutenção
+  // Parada_para_manutenção
   Desligada
 }
